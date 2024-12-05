@@ -124,11 +124,11 @@ const Cart = () => {
                       />
                     </a>
 
-                    <label for="counter-input" class="sr-only">
+                    <label htmlFor="counter-input" className="sr-only">
                       Choose quantity:
                     </label>
-                    <div class="flex items-center justify-between md:order-3 md:justify-end">
-                      <div class="flex items-center">
+                    <div className="flex items-center justify-between md:order-3 md:justify-end">
+                      <div className="flex items-center">
                         <select
                           value={product.qty}
                           onChange={(e) =>
@@ -197,15 +197,15 @@ const Cart = () => {
                 </div>
               ))}
             </div>
-            <div class=" bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0">
-              <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">
+            <div className=" bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0">
+              <h2 className="text-gray-900 text-lg mb-1 font-medium title-font">
                 Shipping
               </h2>
-              <p class="leading-relaxed mb-5 text-gray-600">
+              <p className="leading-relaxed mb-5 text-gray-600">
                 Tell us your shipping address
               </p>
-              <div class="relative mb-4">
-                <label for="name" class="leading-7 text-sm text-gray-600">
+              <div className="relative mb-4">
+                <label htmlFor="name" className="leading-7 text-sm text-gray-600">
                   Address
                 </label>
                 <input
@@ -214,11 +214,11 @@ const Cart = () => {
                   name="address"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                  className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                 />
               </div>
-              <div class="relative mb-4">
-                <label for="email" class="leading-7 text-sm text-gray-600">
+              <div className="relative mb-4">
+                <label htmlFor="email" className="leading-7 text-sm text-gray-600">
                   City
                 </label>
                 <input
@@ -227,11 +227,11 @@ const Cart = () => {
                   name="city"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-                  class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                  className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                 />
               </div>
-              <div class="relative mb-4">
-                <label for="name" class="leading-7 text-sm text-gray-600">
+              <div className="relative mb-4">
+                <label htmlFor="name" className="leading-7 text-sm text-gray-600">
                   Postal code
                 </label>
                 <input
@@ -240,11 +240,11 @@ const Cart = () => {
                   name="postal_code"
                   value={postal_code}
                   onChange={(e) => setPostal(e.target.value)}
-                  class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                  className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                 />
               </div>
-              <div class="relative mb-4">
-                <label for="name" class="leading-7 text-sm text-gray-600">
+              <div className="relative mb-4">
+                <label htmlFor="name" className="leading-7 text-sm text-gray-600">
                   Country
                 </label>
                 <input
@@ -253,12 +253,12 @@ const Cart = () => {
                   name="country"
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
-                  class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                  className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                 />
               </div>
-              <button onClick={saveShippingAddress} class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Save Shipping Address</button>
-              <p class="text-xs text-gray-500 mt-3">
-                NBD
+              <button onClick={saveShippingAddress} className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Save Shipping Address</button>
+              <p className="text-xs text-gray-500 mt-3">
+                Always SAVE your shipping address before payment
               </p>
             </div>
           </div>
