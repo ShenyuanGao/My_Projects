@@ -48,7 +48,7 @@ router.post('/users', AsynHandler( async (req, res) => {
 }));
 
 
-router.get("/products", AsynHandler( async (req, res) => {
+router.post("/products", AsynHandler( async (req, res) => {
     try {
         // Delete all existing users
         await db.query('DELETE FROM products');

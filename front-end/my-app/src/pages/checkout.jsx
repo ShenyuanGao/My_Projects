@@ -6,21 +6,18 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import axios from "axios";
 import { BASE_URL } from "../redux/constants/base-url";
 import { orderAction } from "../redux/action/order";
-import { saveShippingAddressAction } from "../redux/action/cart";
 import Layout from "../layout/layout";
 
 const Cart = () => {
-  const [stock, setStock] = useState({});
-  const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cartReducer);
-  const cartItems = cart.cartItems;
-  const shippingAddress = cart.shippingAddress;
 
-  const [cid, setCid] = useState(null);
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [postal_code, setPostal] = useState("");
-  const [country, setCountry] = useState("");
+  
+
+  const [stock, setStock] = useState({});
+  const [cid, setCid] = useState()
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => {
+    return state.cartReducer});
+  const cartItems = cart.cartItems;
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCartAction(id));
@@ -50,12 +47,13 @@ const Cart = () => {
     return ID.data;
   }
 
-  async function paymentHandler() {
+  function paymentHandler(details) {
     try {
+      console.log(details)
       dispatch(
         orderAction({
           orderItems: cart.cartItems,
-          shippingAddress: cart.shippingAddress,
+          shippingAddress: details,
           totalPrice: Number(total_tax),
           paymentMethods: "paypal",
           price: Number(totalP),
@@ -69,17 +67,6 @@ const Cart = () => {
       console.error(error);
     }
   }
-
-  const saveShippingAddress = () => {
-    dispatch(
-      saveShippingAddressAction({
-        address,
-        city,
-        postal_code,
-        country,
-      })
-    );
-  };
 
   const totalP = totalPrice(cartItems);
   const tax = (totalPrice(cartItems) * 0.13).toFixed(2);
@@ -199,82 +186,7 @@ const Cart = () => {
                     </div>
                   </div>
                 ))}
-              </div>
-              <div className=" bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0">
-                <h2 className="text-gray-900 text-lg mb-1 font-medium title-font">
-                  Shipping
-                </h2>
-                <p className="leading-relaxed mb-5 text-gray-600">
-                  Tell us your shipping address
-                </p>
-                <div className="relative mb-4">
-                  <label
-                    htmlFor="name"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Address
-                  </label>
-                  <input
-                    type="text"
-                    id="address"
-                    name="address"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  />
-                </div>
-                <div className="relative mb-4">
-                  <label
-                    htmlFor="email"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    City
-                  </label>
-                  <input
-                    type="text"
-                    id="city"
-                    name="city"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  />
-                </div>
-                <div className="relative mb-4">
-                  <label
-                    htmlFor="name"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Postal code
-                  </label>
-                  <input
-                    type="text"
-                    id="postal_code"
-                    name="postal_code"
-                    value={postal_code}
-                    onChange={(e) => setPostal(e.target.value)}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  />
-                </div>
-                <div className="relative mb-4">
-                  <label
-                    htmlFor="name"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Country
-                  </label>
-                  <input
-                    type="text"
-                    id="country"
-                    name="country"
-                    value={country}
-                    onChange={(e) => setCountry(e.target.value)}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  />
-                </div>
-                <button onClick={saveShippingAddress} type="button" className="w-full text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"><strong>Confirm Order</strong></button>
-                <p className="text-xs text-gray-500 mt-3">
-                  Always confirm your shipping address before payment
-                </p>
+                Remember to refresh when updating products
               </div>
             </div>
 
@@ -333,21 +245,17 @@ const Cart = () => {
                   </dl>
                 </div>
 
-                {cid && (
+
+                {
+                
+                cid && (
                   <PayPalScriptProvider
                     options={{ clientId: cid, currency: "CAD" }}
+                    key={total_tax}
                   >
                       <PayPalButtons
                         createOrder={async (data, actions) => {
-                          dispatch(
-                            saveShippingAddressAction({
-                              address,
-                              city,
-                              postal_code,
-                              country,
-                            })
-                          );
-                          return actions.order.create({
+                          return await actions.order.create({
                             purchase_units: [
                               {
                                 amount: {
@@ -361,15 +269,24 @@ const Cart = () => {
                         onApprove={async (data, actions) => {
                           try {
                             const details = await actions.order.capture();
+                            console.log(data)
                             console.log(details);
-                            paymentHandler(details);
+                            const shippingAddress = {
+                              address: details.purchase_units[0].shipping.address.address_line_1,
+                              city: details.purchase_units[0].shipping.address.admin_area_2,
+                              postal_code: details.purchase_units[0].shipping.address.postal_code,
+                              country: details.purchase_units[0].shipping.address.country_code
+
+                            }
+                            paymentHandler(shippingAddress);
                           } catch (error) {
                             console.error("Payment approval failed:", error);
                           }
                         }}
                       />
                   </PayPalScriptProvider>
-                )}
+                )
+              }
 
                 <div className="flex items-center justify-center gap-2">
                   <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
@@ -401,32 +318,7 @@ const Cart = () => {
                 </div>
               </div>
 
-              <div className="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6">
-                <form className="space-y-4">
-                  <div>
-                    <label
-                      htmlFor="voucher"
-                      className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      {" "}
-                      Do you have a voucher or gift card?{" "}
-                    </label>
-                    <input
-                      type="text"
-                      id="voucher"
-                      className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-                      placeholder=""
-                      required
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                  >
-                    Apply Code
-                  </button>
-                </form>
-              </div>
+
             </div>
           </div>
         </div>

@@ -8,8 +8,10 @@ import { useSelector } from "react-redux";
 import Cart from "./pages/checkout";
 import Confirmation from "./pages/confirmation";
 import Orderhistory from "./pages/orderHistory";
+import Product_review from "./pages/product_review";
 //when user info updated, can be in login or register, go to main page
 function App() {
+
 
   const userLoginReducer = useSelector((state) => state.userLoginReducer)
   const {userInfo} = userLoginReducer
@@ -27,6 +29,7 @@ function App() {
         <Route exact path="/register" element={userInfo ? <Navigate to="/" ></Navigate> : <Register />}></Route>
         <Route exact path="/cart" element={userInfo ? (success ? <Confirmation /> : <Cart />) : <Navigate to="/"></Navigate>}></Route>
         <Route exact path="/order_history" element={userInfo ? <Orderhistory /> : <Navigate to="/"></Navigate>}></Route>
+        <Route exact path="/review/:id" element={userInfo ? <Product_review /> : <Navigate to="/"></Navigate>}></Route>
       </Routes>
     </Router>
     </>

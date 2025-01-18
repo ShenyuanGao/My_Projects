@@ -39,8 +39,8 @@ export const userLoginAction = (email, password) => async (dispatch) => {
         { name, email, password }
       );
   
-      dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
-      dispatch({ type: USER_LOGIN_REQ_SUCCESS, payload: data });
+      dispatch({ type: USER_REGISTER_SUCCESS, payload: data }); //Simulate login action
+      dispatch({type: USER_LOGIN_REQ_SUCCESS, payload: data})
   
       localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {

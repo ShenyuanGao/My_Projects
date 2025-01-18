@@ -73,7 +73,7 @@ orderRoute.post("/", protect, AsyncHandler (async (req, res) => {
                  VALUES ($1, $2, $3, $4, $5, $6)`,
                 [
                     orderId,
-                    item.productId,
+                    item.product,
                     item.name,
                     item.qty,
                     item.price,

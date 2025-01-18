@@ -87,7 +87,10 @@ userRoute.post("/register", AsynHandler (async(req, res) => {
               "INSERT INTO users (name, email, password, is_admin) VALUES ($1, $2, $3, $4) RETURNING *",
               [name, email, hash, is_admin]
             );
-            res.status(200).json(result.rows[0])
+            res.status(200).json({
+              ...result.rows[0],
+              token: generateToken(result.rows[0].id)
+            })
           }
         });
       }

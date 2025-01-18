@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 const Confirmation = () => {
   const [detail, setDetail] = useState(null);
 
+
   async function getOrderDetail(id, token) {
     const config = {
       headers: {
@@ -33,6 +34,7 @@ const Confirmation = () => {
   const orderReducer = useSelector((state) => {
     return state.orderReducer;
   });
+
   const { order } = orderReducer;
   const { userInfo } = userLoginReducer;
 
@@ -40,7 +42,7 @@ const Confirmation = () => {
     const getOrder = async () => {
       const countData = await getOrderDetail(order.orderId, userInfo.token);
       if (countData) {
-        setDetail(countData); 
+        setDetail(countData);
       }
     };
     getOrder();
@@ -72,7 +74,7 @@ const Confirmation = () => {
                   Date
                 </dt>
                 <dd className="font-medium text-gray-900 dark:text-white sm:text-end">
-                  {detail.created_at.slice(0,10)}
+                  {detail.created_at.slice(0, 10)}
                 </dd>
               </dl>
               <dl className="sm:flex items-center justify-between gap-4">
@@ -96,7 +98,13 @@ const Confirmation = () => {
                   Address
                 </dt>
                 <dd className="font-medium text-gray-900 dark:text-white sm:text-end">
-                  {detail.shipping_address.address + ", " + detail.shipping_address.city + ", " + detail.shipping_address.postal_code + ", " + detail.shipping_address.country} 
+                  {detail.shipping_address.address +
+                    ", " +
+                    detail.shipping_address.city +
+                    ", " +
+                    detail.shipping_address.postal_code +
+                    ", " +
+                    detail.shipping_address.country}
                 </dd>
               </dl>
               <dl className="sm:flex items-center justify-between gap-4">
