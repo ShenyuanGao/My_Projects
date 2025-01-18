@@ -2,8 +2,6 @@ import axios from "axios";
 import {
     ADD_ITEM_TO_CART,
     REMOVE_ITEM_FROM_CART,
-    CART_ITEM_CLEAR,
-    CART_SAVE_SHIPPING_ADDRESS,
     SAVE_PAYMENT_METHOD,
   } from "../constants/cart";
 import { BASE_URL } from "../constants/base-url";

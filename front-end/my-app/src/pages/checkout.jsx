@@ -16,6 +16,7 @@ const Cart = () => {
   const [cid, setCid] = useState()
   const dispatch = useDispatch();
   const cart = useSelector((state) => {
+    console.log(state)
     return state.cartReducer});
   const cartItems = cart.cartItems;
 
@@ -186,7 +187,6 @@ const Cart = () => {
                     </div>
                   </div>
                 ))}
-                Remember to refresh when updating products
               </div>
             </div>
 
@@ -247,15 +247,15 @@ const Cart = () => {
 
 
                 {
-                
+                //address from paypal need to upgraded into business account
                 cid && (
                   <PayPalScriptProvider
                     options={{ clientId: cid, currency: "CAD" }}
                     key={total_tax}
                   >
                       <PayPalButtons
-                        createOrder={async (data, actions) => {
-                          return await actions.order.create({
+                        createOrder={(data, actions) => {
+                          return actions.order.create({
                             purchase_units: [
                               {
                                 amount: {
@@ -264,13 +264,14 @@ const Cart = () => {
                                 },
                               },
                             ],
+                            application_context: {
+                              shipping_preference: 'GET_FROM_FILE', // Request shipping address from PayPal
+                            },
                           });
                         }}
                         onApprove={async (data, actions) => {
                           try {
                             const details = await actions.order.capture();
-                            console.log(data)
-                            console.log(details);
                             const shippingAddress = {
                               address: details.purchase_units[0].shipping.address.address_line_1,
                               city: details.purchase_units[0].shipping.address.admin_area_2,
