@@ -1,7 +1,5 @@
 # E-Commerce PERN
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
-
 ## Overview Functionality
 This E-Commerce web app allow user to create account, choose their favourite product, add to cart, remove from cart, buy products, give personalized recommendation (in construction), manage order history, purcahse with paypal (using paypal payments API) or using debit or credit card. User can also review products bought
 
