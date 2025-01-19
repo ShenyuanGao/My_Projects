@@ -14,6 +14,12 @@ const Cart = () => {
 
   const [stock, setStock] = useState({});
   const [cid, setCid] = useState()
+
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [postal_code, setPostal] = useState("");
+  const [country, setCountry] = useState("");
+
   const dispatch = useDispatch();
   const cart = useSelector((state) => {
     console.log(state)
@@ -188,7 +194,70 @@ const Cart = () => {
                   </div>
                 ))}
               </div>
+              <div className="bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0">
+              <h2 className="text-gray-900 text-lg mb-1 font-medium title-font">
+                Shipping
+              </h2>
+              <p className="leading-relaxed mb-5 text-gray-600">
+                Tell us your shipping address
+              </p>
+              <div className="relative mb-4">
+                <label htmlFor="name" className="leading-7 text-sm text-gray-600">
+                  Address
+                </label>
+                <input
+                  type="text"
+                  id="address"
+                  name="address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                />
+              </div>
+              <div className="relative mb-4">
+                <label htmlFor="email" className="leading-7 text-sm text-gray-600">
+                  City
+                </label>
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                />
+              </div>
+              <div className="relative mb-4">
+                <label htmlFor="name" className="leading-7 text-sm text-gray-600">
+                  Postal code
+                </label>
+                <input
+                  type="text"
+                  id="postal_code"
+                  name="postal_code"
+                  value={postal_code}
+                  onChange={(e) => setPostal(e.target.value)}
+                  className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                />
+              </div>
+              <div className="relative mb-4">
+                <label htmlFor="name" className="leading-7 text-sm text-gray-600">
+                  Country
+                </label>
+                <input
+                  type="text"
+                  id="country"
+                  name="country"
+                  value={country}
+                  placeholder="Country code here, Canada as CA, states as US"
+                  onChange={(e) => setCountry(e.target.value)}
+                  className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                />
+              </div>
             </div>
+            </div>
+
+
 
             <div className="mx-auto mt-6 max-w-4xl flex-1 space-y-6 lg:mt-0 lg:w-full">
               <div className="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6">
@@ -245,33 +314,45 @@ const Cart = () => {
                   </dl>
                 </div>
 
-
+                {console.log(address, city, postal_code, country)}
                 {
                 //address from paypal need to upgraded into business account
                 cid && (
                   <PayPalScriptProvider
                     options={{ clientId: cid, currency: "CAD" }}
-                    key={total_tax}
+                    key={`${total_tax}-${address}-${city}-${postal_code}-${country}`}
                   >
                       <PayPalButtons
                         createOrder={(data, actions) => {
                           return actions.order.create({
-                            purchase_units: [
-                              {
-                                amount: {
-                                  currency_code: "CAD",
-                                  value: total_tax,
-                                },
-                              },
-                            ],
                             application_context: {
-                              shipping_preference: 'GET_FROM_FILE', // Request shipping address from PayPal
-                            },
+                              brand_name: "Chenhe E-Commerce",
+                              shipping_preference: "SET_PROVIDED_ADDRESS",
+                          },
+                              purchase_units: [
+                                  {
+                                      amount: {
+                                          currency_code: "CAD",
+                                          value: total_tax,
+                                      },
+                                      shipping: {
+                                            address: {
+                                                address_line_1: address,
+                                                admin_area_2: city,
+                                                postal_code: postal_code,
+                                                country_code: country,
+                                            },
+                                        },
+                                  },
+                              ]
+                              
                           });
-                        }}
+                      }}
+                      
                         onApprove={async (data, actions) => {
                           try {
                             const details = await actions.order.capture();
+                            console.log(details)
                             const shippingAddress = {
                               address: details.purchase_units[0].shipping.address.address_line_1,
                               city: details.purchase_units[0].shipping.address.admin_area_2,
