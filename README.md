@@ -73,6 +73,5 @@ Don't forget to give the project a star! Thanks again!
 
 ## Contact
 
-Chenhewu - wu509@mcmaster.ca
-Project Link: [E-commerce PERN](https://github.com/tomwuchenhe/e-comm-PERN)
+Shenyuan Gao - gaos74@mcmaster.ca
 
