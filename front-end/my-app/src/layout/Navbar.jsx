@@ -22,7 +22,7 @@ const Navbar = () => {
     <nav className="bg-white border-gray-200 dark:bg-gray-900 mt-3">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a
-          href="https://github.com/tomwuchenhe"
+          href="https://github.com/ShenyuanGao/My_Projects"
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
           <svg
