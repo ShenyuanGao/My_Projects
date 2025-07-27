@@ -83,9 +83,4 @@ cd Price\ Tracker
 - For robust tracking of major sites, consider integrating a third-party price API.
 
 
-## License
-MIT
-
----
-
 **Made with ❤️ by [Shenyuan Gao](https://github.com/gaoshenyuan)**
