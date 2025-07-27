@@ -8,7 +8,7 @@
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "Chenhe Wu",
+  "author": "Shenyuan Gao",
   "license": "ISC",
   "description": "E-commerce Site",
   "dependencies": {
