@@ -1,7 +1,16 @@
 # E-Commerce PERN
 
 ## Overview Functionality
-This E-Commerce web app allow user to create account, choose their favourite product, add to cart, remove from cart, buy products, give personalized recommendation (in construction), manage order history, purcahse with paypal (using paypal payments API) or using debit or credit card. User can also review products bought
+This E-Commerce web app allow user to create account and login,
+![App Screenshot](images/demo1.jpg)
+
+choose their favourite product, 
+![App Screenshot](images/demo2.jpg)
+
+add to cart, remove from cart, buy products, give personalized recommendation (in construction), manage order history, 
+![App Screenshot](images/demo3.jpg)
+purcahse with paypal (using paypal payments API) or using debit or credit card. User can also review products bought
+![App Screenshot](images/demo4.jpg)
 
 * ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 * ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
